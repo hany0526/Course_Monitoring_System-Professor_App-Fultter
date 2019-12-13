@@ -5,7 +5,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Form Validation Demo';
+    final appTitle = 'Add a new course Form';
 
     return MaterialApp(
       title: appTitle,
@@ -45,14 +45,40 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+        TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.title ),
+                hintText: 'a new courses title',
+                labelText: 'Title  *',
+              ),
+              onSaved: (String value) {
+                // This optional block of code can be used to run
+                // code when the user saves the form.
+              },
+              validator: (String value) {
+                if (value.isEmpty) {
+                return 'Please enter Title';
               }
-              return null;
-            },
-          ),
+                return value.contains('@') ? 'Do not use the @ char.' : null;
+              },
+            ),
+             TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.description ),
+                hintText: 'a courses description',
+                labelText: 'Description *',
+              ),
+              onSaved: (String value) {
+                // This optional block of code can be used to run
+                // code when the user saves the form.
+              },
+              validator: (String value) {
+                if (value.isEmpty) {
+                return 'Please enter a courses description';
+              }
+                return value.contains('@') ? 'Do not use the @ char.' : null;
+              },
+            ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
